@@ -40,6 +40,15 @@ EXAMPLE:
 https://tradingview-technical-analysis.herokuapp.com/BTCUSDT/crypto/BINANCE/1d
 ```
 
+Available Parameters:
+
+```
+Symbol (str) – (e.g., "AAPL", "TLKM", "USDEUR", "BTCUSDT").
+Exchange (str) –  (e.g., "nasdaq", "idx", Exchange.FOREX, "binance").
+Screener (str) –  (e.g., "america", "indonesia", "forex", "crypto").
+Interval (str) - (1m, 5m, 15m, 30m, 1h, 2h, 4h, 1d, 1w, 1month)
+```
+
 Available Interval:
 
 ```
