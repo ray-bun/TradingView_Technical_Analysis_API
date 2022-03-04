@@ -27,7 +27,7 @@ pip install -r requirements.txt
 Start API
 
 ```
-python api.py
+python app.py
 ```
 
 # Usage
