@@ -37,7 +37,7 @@ Sample URL below is how we fetch BTCUSDT pair from Binance on a 1 Day chart.
 ```
 http://localhost:5000/<SYMBOL>/<SCREENER>/<EXCHANGE>/<INTERVAL>
 EXAMPLE:
-http://localhost:5000/BTCUSDT/crypto/BINANCE/1d
+https://tradingview-technical-analysis.herokuapp.com/BTCUSDT/crypto/BINANCE/1d
 ```
 
 Available Interval:
