@@ -35,6 +35,42 @@ INTERVAL_MAPPING = {
     '1month': Interval.INTERVAL_1_MONTH
 }
 
+class APIInfo(Resource):
+    """Main API information and usage examples"""
+    def get(self):
+        return {
+            'service': 'TradingView Technical Analysis API',
+            'version': '2.0.0',
+            'description': 'Get technical analysis data for stocks, crypto, and forex from TradingView',
+            'usage': {
+                'format': '/{symbol}/{screener}/{exchange}/{timeinterval}',
+                'examples': [
+                    {
+                        'url': '/AAPL/america/NASDAQ/1d',
+                        'description': 'Apple stock daily analysis on NASDAQ'
+                    },
+                    {
+                        'url': '/BTCUSD/crypto/BINANCE/4h',
+                        'description': 'Bitcoin 4-hour analysis on Binance'
+                    },
+                    {
+                        'url': '/EURUSD/forex/FX_IDC/1h',
+                        'description': 'EUR/USD 1-hour forex analysis'
+                    }
+                ]
+            },
+            'parameters': {
+                'symbol': 'Trading symbol (e.g., AAPL, BTCUSD, EURUSD)',
+                'screener': 'Market screener (america, crypto, forex)',
+                'exchange': 'Exchange name (NASDAQ, BINANCE, FX_IDC, etc.)',
+                'timeinterval': f'Time interval {list(INTERVAL_MAPPING.keys())}'
+            },
+            'endpoints': {
+                'health_check': '/health',
+                'analysis': '/{symbol}/{screener}/{exchange}/{timeinterval}'
+            }
+        }, 200
+
 class HealthCheck(Resource):
     """Health check endpoint for monitoring and load balancers"""
     def get(self):
@@ -109,8 +145,32 @@ class TradingView(Resource):
 @app.errorhandler(404)
 def not_found(error):
     return jsonify({
-        'error': 'Not found',
-        'message': 'The requested resource was not found'
+        'error': 'Endpoint not found',
+        'message': 'The TradingView Technical Analysis API requires specific parameters',
+        'usage': {
+            'format': '/{symbol}/{screener}/{exchange}/{timeinterval}',
+            'examples': [
+                {
+                    'url': '/AAPL/america/NASDAQ/1d',
+                    'description': 'Apple stock daily analysis on NASDAQ'
+                },
+                {
+                    'url': '/BTCUSD/crypto/BINANCE/4h',
+                    'description': 'Bitcoin 4-hour analysis on Binance'
+                },
+                {
+                    'url': '/EURUSD/forex/FX_IDC/1h',
+                    'description': 'EUR/USD 1-hour forex analysis'
+                }
+            ]
+        },
+        'parameters': {
+            'symbol': 'Trading symbol (e.g., AAPL, BTCUSD, EURUSD)',
+            'screener': 'Market screener (america, crypto, forex)',
+            'exchange': 'Exchange name (NASDAQ, BINANCE, FX_IDC, etc.)',
+            'timeinterval': f'Time interval {list(INTERVAL_MAPPING.keys())}'
+        },
+        'health_check': '/health'
     }), 404
 
 @app.errorhandler(500)
@@ -121,6 +181,7 @@ def internal_error(error):
     }), 500
 
 # Add resources to API
+api.add_resource(APIInfo, '/')
 api.add_resource(HealthCheck, '/health')
 api.add_resource(TradingView, "/<string:symbol>/<string:screener>/<string:exchange>/<string:timeinterval>")
 
