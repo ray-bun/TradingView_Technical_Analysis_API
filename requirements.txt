@@ -1,17 +1,32 @@
+# Core Flask dependencies
+Flask==3.0.3
+Flask-RESTful==0.3.10
+gunicorn==22.0.0
+
+# TradingView TA library
+tradingview-ta==3.3.0
+
+# HTTP requests
+requests==2.32.3
+
+# Production dependencies
+Werkzeug==3.0.3
+
+# Security and utilities
+itsdangerous==2.2.0
+MarkupSafe==2.1.5
+Jinja2==3.1.4
+click==8.1.7
+
+# Time and date handling
+pytz==2024.1
+
+# SSL certificates
+certifi==2024.7.4
+
+# Additional utilities
+six==1.16.0
+urllib3==2.2.2
+idna==3.7
+charset-normalizer==3.3.2
 aniso8601==9.0.1
-certifi==2020.12.5
-chardet==4.0.0
-click==7.1.2
-Flask==1.1.2
-Flask-RESTful==0.3.8
-idna==2.10
-itsdangerous==1.1.0
-Jinja2==2.11.3
-MarkupSafe==1.1.1
-pytz==2021.1
-requests==2.25.1
-six==1.15.0
-tradingview-ta==3.2.10
-urllib3==1.26.4
-Werkzeug==1.0.1
-gunicorn==20.1.0
